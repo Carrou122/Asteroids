@@ -43,6 +43,7 @@ def main():
             
         dt = (clock.tick(60)/1000)
         updatable.update(dt)
+        pygame.sprite.groupcollide(asteroids, shots, True, True)
         for asteroid in asteroids:
             if player.collision(asteroid) is True:
                 screen.blit(game_over_text, (x_centered, y_centered))
