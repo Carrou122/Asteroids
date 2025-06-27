@@ -1,6 +1,7 @@
 import pygame
 import sys
 import time
+import random
 from constants import *
 from player import *
 from circleshape import *
@@ -43,8 +44,9 @@ def main():
             
         dt = (clock.tick(60)/1000)
         updatable.update(dt)
-        pygame.sprite.groupcollide(asteroids, shots, True, True)
-        for asteroid in asteroids:
+        collisions = pygame.sprite.groupcollide(asteroids, shots, False, True)
+        for asteroid in collisions:
+            asteroid.split()
             if player.collision(asteroid) is True:
                 screen.blit(game_over_text, (x_centered, y_centered))
                 pygame.display.flip()
